@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.renderscript.ScriptGroup;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -31,16 +32,24 @@ public class MainActivity extends AppCompatActivity {
                 int data = reader.read();
 
                 while (data != -1) {
-                    
+                    char current  = (char) data;
+                    result += current;
+                    data = reader.read();
                 }
+                return result;
 
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;
             }
 
+        }
 
-            return null;
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            Log.i("JSON:", s);
         }
     }
 
